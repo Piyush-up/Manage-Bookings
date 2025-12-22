@@ -50,7 +50,7 @@ const QuotationUI = () => {
       <Header
         style={{
           background:
-            "",
+            "#1b176e",
           display: "flex",
           alignItems: "center",
           paddingInline: 24,
