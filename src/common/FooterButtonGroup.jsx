@@ -1,6 +1,6 @@
 import React from 'react';
 import './FooterButtonGroup.css';
-import ButtonType from './Button';
+import {FooterPrimaryButton} from './FooterButton.jsx';
 
 const buttonConfigs = [
   { label: 'Save', className: 'footer-btn' },
@@ -14,13 +14,13 @@ const buttonConfigs = [
 const FooterButtonGroup = ({ onButtonClick }) => (
   <div className="footer-btn-group">
     {buttonConfigs.map((btn) => (
-      <ButtonType
+      <FooterPrimaryButton
         key={btn.label}
         className={btn.className}
         onClick={() => onButtonClick && onButtonClick(btn.label)}
       >
         {btn.label}
-      </ButtonType>
+      </FooterPrimaryButton>
     ))}
   </div>
 );

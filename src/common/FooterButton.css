@@ -1,0 +1,24 @@
+.common-btn {
+  background-color: #022471 ;
+  color: #fff ;
+  cursor: pointer;
+  font-size: 12px;
+
+    font-weight: 500;
+  border: 1px solid #022471 !important;
+}
+
+.common-btn-danger {
+  background-color: rgb(157, 29, 38)  ;
+    color: #fff ;
+  cursor: pointer;
+  font-size: 12px;
+ font-weight: 500;
+  border: 1px solid rgb(157, 29, 38) !important ;
+}
+
+.common-btn.common-btn-danger:hover {
+  background-color: rgb(156, 165, 186) !important;
+  color: #fff !important;
+  border: 1px solid rgb(156, 165, 186) !important;
+}
