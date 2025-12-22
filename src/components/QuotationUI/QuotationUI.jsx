@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import {
   Layout,
   Input,
@@ -11,13 +11,16 @@ import {
   Card,
   Spin,
 } from "antd";
-import Button from "../../common/Button.jsx";
+import {FooterDangerButton} from "../../common/FooterButton.jsx";
 import FooterButtonGroup from "../../common/FooterButtonGroup";
 import { useTabState, TabContainer } from "../../hooks/useTabState.jsx";
 import tableColumns from "../../data/tableColumns.json";
 import tableData from "../../data/tableData.json";
 import uiData from "../../data/uiData.json";
 import "./QuotationUI.css";
+import { useDispatch } from "react-redux";
+import { fetchCities } from "../../store/slices/quotationSlice.js";
+
 
 const RequestedITI = lazy(() => import("./RequestedITI"));
 const EditService = lazy(() => import("./EditService"));
@@ -36,6 +39,7 @@ const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
 const QuotationUI = () => {
+  const dispatch = useDispatch();
   const { activeTab: activeMainTab, setActiveTab: setActiveMainTab } =
     useTabState("Suggested Trip");
   const { activeTab: rightTab, setActiveTab: setRightTab } =
@@ -44,6 +48,11 @@ const QuotationUI = () => {
   const columns = tableColumns.quotationColumns;
   const dataSource = tableData.quotationData;
   const requestItems = uiData.requestItems;
+
+
+  useEffect(() => {
+dispatch(fetchCities()); 
+  }, [dispatch]);
 
   return (
     <Layout >
@@ -98,10 +107,10 @@ const QuotationUI = () => {
                         style={{ height: 32, textAlign: "center" }}
                       />
                     </div>
-                    <Button className="btn-add">+</Button>
-                    <Button className="btn-go">Go</Button>
+                    <FooterDangerButton >+</FooterDangerButton>
+                    <FooterDangerButton>Go</FooterDangerButton>
                     {["HTLS Map", "Supp Map", "CityRoute"].map((btn) => (
-                      <Button key={btn} className="btn-map">{btn}</Button>
+                      <FooterDangerButton key={btn} className="btn-map" >{btn}</FooterDangerButton>
                     ))}
                   </div>
                 </div>

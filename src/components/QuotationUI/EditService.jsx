@@ -1,33 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Typography, Button } from "antd";
 import "./EditService.css";
 
 const { Title } = Typography;
 
 const EditService = ({ onAdd = () => {}, onSave = () => {} }) => {
-  const [formData, setFormData] = useState({
-    twb: "value",
-    ss: "value",
-    driverRoom: "value",
-    dRoomPrice: "value",
-    bathTubAvailable: "Yes",
-    manualServiceName: "value",
-    serviceText: "value",
-    priceText: "value",
-    editedPriceText: "value",
-    breakfast: "value",
-    breakfastPrice: "value",
-    lunch: "value",
-    lunchPrice: "value",
-    dinner: "value",
-    dinnerPrice: "value",
-    luggage: "value",
-    luggagePrice: "value",
-    tsu: "value",
-    thirdRed: "value",
-    guideRooms: "value",
-    gRoomPrice: "value",
-  });
+  
 
   return (
     <Card
