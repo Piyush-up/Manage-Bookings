@@ -1,0 +1,75 @@
+.edit-service-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.price-request-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+}
+
+.price-request-table td {
+  padding: 8px 6px;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+
+.price-request-table td.label {
+  font-weight: 500;
+  color: #333;
+  background-color: #f9f9f9;
+  width: 20%;
+  vertical-align: top;
+}
+
+.price-request-table td.value {
+  color: #666;
+  width: 30%;
+}
+
+.form-section {
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color: #f9f9f9;
+}
+
+.section-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+}
+
+.section-item:last-child {
+  border-bottom: none;
+}
+
+.section-item .label {
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+}
+
+.section-item .value {
+  color: #666;
+}
+
+.price-input {
+  padding: 8px 0;
+}
+
+.edit-service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-service-header .ant-typography {
+  flex: 1;
+}

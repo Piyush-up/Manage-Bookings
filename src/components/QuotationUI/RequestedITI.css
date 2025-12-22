@@ -1,0 +1,92 @@
+.requested-iti-container .ant-card-head {
+  padding: 12px 16px;
+}
+
+.requested-iti-container .ant-card-body {
+  padding: 12px 16px;
+}
+
+.requested-iti-content {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.requested-iti-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.requested-iti-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.requested-iti-item {
+  padding: 8px 12px;
+  line-height: 1.5;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.requested-iti-item:last-child {
+  border-bottom: none;
+}
+
+.requested-iti-item:hover {
+  background-color: #f5f5f5;
+}
+
+.items-list-container {
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.item-row {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.item-row:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.item-row.alternate-bg {
+  background-color: #fafafa;
+}
+
+.item-row:hover {
+  background-color: #f0f0f0;
+}
+
+.item-select-btn {
+  color: #1890ff;
+}
+
+.item-select-btn:hover {
+  color: #0050b3;
+}
+
+.items-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.items-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.items-list-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.items-list-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

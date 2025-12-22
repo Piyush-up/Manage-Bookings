@@ -1,0 +1,24 @@
+{
+  "quotationData": [
+    {
+      "key": 1,
+      "sno": 1,
+      "country": "IT",
+      "city": "Rome",
+      "type": "RST",
+      "supplier": "GANDHI – VIA PELLEGRINO",
+      "service": "Rome APT – 08 Hours",
+      "price": "8.24",
+      "currency": "EUR"
+    }
+  ],
+  "tourCostData": [
+    {
+      "key": 1,
+      "type": "RST",
+      "currency": "DKK",
+      "avgP": 8,
+      "avgC": 0
+    }
+  ]
+}

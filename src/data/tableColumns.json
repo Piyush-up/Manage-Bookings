@@ -1,0 +1,18 @@
+{
+  "quotationColumns": [
+    { "title": "S.No", "dataIndex": "sno", "width": 70 },
+    { "title": "Country", "dataIndex": "country", "width": 90 },
+    { "title": "City", "dataIndex": "city", "width": 120 },
+    { "title": "Type", "dataIndex": "type", "width": 90 },
+    { "title": "Supplier", "dataIndex": "supplier", "width": 260 },
+    { "title": "Service", "dataIndex": "service", "width": 260 },
+    { "title": "Price", "dataIndex": "price", "align": "right", "width": 90 },
+    { "title": "Currency", "dataIndex": "currency", "width": 90 }
+  ],
+  "tourCostColumns": [
+    { "title": "Type", "dataIndex": "type", "width": 80 },
+    { "title": "Currency", "dataIndex": "currency", "width": 80 },
+    { "title": "Avg(P)", "dataIndex": "avgP", "align": "right", "width": 80 },
+    { "title": "Avg(C)", "dataIndex": "avgC", "align": "right", "width": 80 }
+  ]
+}

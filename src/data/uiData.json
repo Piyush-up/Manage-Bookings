@@ -1,0 +1,21 @@
+{
+  "tabs": [
+    "My Trip",
+    "Suggested Trip",
+    "Quote Sheet",
+    "Offer Sheet",
+    "Conditions",
+    "Revenue Sheet",
+    "Sales Sheet",
+    "ITL Sheet",
+    "Optional Tour"
+  ],
+  "requestItems": [
+    "TakeaBreak: Scandinavia Quote Sep 2017",
+    "APOLLO WORLD AT-DE-SL-HU-CZ 23-29 MAY 2017"
+  ],
+  "rightTabs": [
+    "RequestedITI",
+    "EditService"
+  ]
+}
