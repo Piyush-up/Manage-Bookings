@@ -1,6 +1,6 @@
 import React from 'react';
 import './FooterButtonGroup.css';
-import {FooterPrimaryButton} from './FooterButton.jsx';
+import { FooterPrimaryButton } from "..//FooterButton/FooterButton.jsx";
 
 const buttonConfigs = [
   { label: 'Save', className: 'footer-btn' },

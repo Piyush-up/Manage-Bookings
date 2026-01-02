@@ -1,0 +1,77 @@
+ { "htlsData": [
+      {
+        "Hotel": "President Hotel",
+        "desc": "A contemporary hotel in a classic Bloomsbury setting many rooms offer views over London¿s famous Russell Square.Close to the underground station with a direct link with Heathrow Airport.Saracen's Carvery elegantly combines traditional quality with modern practicality.Enjoy classic carvery cooking and an impressive wine list in handsome surroundings.The Atrium is where guests from both the President and the Imperial come to mingle,catch up on work, or simply relax.It has got the whole day covered: pastries for breakfast, traditional English cream teas in the afternoon, and drinks and antipasti for evening visitors.Follow a spiral staircase up to our first floor Bar Barella. It is designed with the bright and brazen spirit of the sixties in mind.The Night and Day bar is popular with guests staying at the Imperial and the President Hotels.Both recognise its quality and attention to detail. It's the perfect place for a casual lunch, an evening meal or time spent catching up with friends.",
+        "lat": "51.522317",
+        "long": "-0.124055",
+        "SupplierNo": "008137",
+        "address": "Guilford Street 56-60, WC1N 1DB London, The United Kingdom",
+        "CityName": "London",
+        "countryCode": "GB"
+      },
+      {
+        "Hotel":
+          "a&o London Docklands Riverside (ex Doubletree by Hilton London Docklands Riverside",
+"desc": "Welcome to the DoubleTree by Hilton Hotel London - Docklands Riverside. We're located along the River Thames with stunning views of Canary Wharf. This former 17th century Wharf Building boasts exposed brickwork and London's last dry dock for shipbuilding.Nearby attractions include Tower Bridge, The O2, Cutty Sark, London Eye and Westminster Parliament, all easily accessible by public transport. Our complimentary ferry provides access to Canary Wharf and a connection to the Thames Clippers riverboat service for an unforgettable voyage into central London. The nearby Underground stations and Docklands Light Railway stations also offer links to the city and are easily accessible by foot or bus.Your stay begins with a warm chocolate chip cookie at check-in. Guest rooms feature a flat-screen 42' LED TV, tea & coffee facilities, and most offer city or river views. Business travellers will appreciate the laptop-sized safe, large desk and 24-hour room service.",
+        "lat": "51.504258",
+        "long": "-0.033395",
+        "SupplierNo": "007600",
+        "address": "265 Rotherhithe Street, SE16 5HW, London",
+        "CityName": "London",
+        "countryCode": "GB"
+      },
+      {
+        "Hotel": "Hilton London Metropole",
+        "desc": "At Hilton London Metropole, we combine a fantastic Central London location ¿ great for visiting many of the capital¿s favorite attractions ¿ with comfortable guest rooms and first-class facilities.Take in panoramic views of London from a Deluxe room or choose one of London¿s largest double bedded rooms, the Superior Room, which is spacious enough for whole families or a group of friends. An upgrade to an Executive or Suite will allow you access to the Executive Lounge, serving free breakfast and refreshments throughout the day. We offer a fantastic choice of bars and restaurants . Our Whisky & Gin Lounge offers a wide selection of whiskies from around the world and perfectly paired light bites. You¿ll find international cuisine, cocktails and afternoon tea on the menu at EDG Bar & Lounge. For a meal to remember, head to our Mediterranean-influenced Fiamma Restaurant. Start the day with an invigorating workout in our 2nd-floor gym , we also offer an indoor pool and sauna.",
+        "lat": "51.519257",
+        "long": "-0.169385",
+        "SupplierNo": "007605",
+        "address": "Edgware Road, 225, W2 1JU, London, United Kingdom",
+        "CityName": "London",
+        "countryCode": "GB"
+      },
+      {
+        "Hotel": "Hilton London Paddington",
+        "desc": "One of London¿s grandest Victorian hotels, Hilton London Paddington offers modern facilities in a fantastic location at Paddington Station. We¿re just 15 minutes from Heathrow airport via the Heathrow Express and with four London Underground lines on our doorstep ¿ Circle, Hammersmith & City, District, and Bakerloo ¿ we remain one of the best-connected hotels in the capital. After a busy day exploring the city, rest in one of our elegant guest rooms. Looking to upgrade? Suites, executive and GWR rooms offer complimentary access to the Executive Lounge, serving free continental breakfast and refreshments throughout the day. Order breakfast, lunch, or dinner in the new Carriages Restaurant and choose from a diverse menu with continental influences ¿ perfect for relaxed dining with family or friends. Arriving late? Join us for late-night dining and a nightcap in the contemporary 146 Paddington.",
+        "lat": "51.51567",
+        "long": "-0.175717",
+        "SupplierNo": "007607",
+        "address": "Praed Street 146, W2 1EE, London",
+        "CityName": "London",
+        "countryCode": "GB"
+      },
+      {
+        "Hotel": "The Tower Hotel by Thistle (former Guoman)",
+        "desc": "Nestled along the River Thames, The Tower Hotel, London, brings you into the midst of some of London¿s most iconic landmarks and famous locations, including the Tower of London, the Shard and more.As a 4 star hotel near Tower Bridge, our hotel combines comfort and convenience with unparalleled views. With 801 rooms to choose from, including accessible options and sumptuous suites, a range of bars and restaurants and fantastic service, The Tower Hotel delivers the ideal hotel experience. Whether you¿re enjoying a tipple or two at Xi Bar, a thoroughly indulgent afternoon tea or an array of sharing plates at The Tower¿s restaurant, Vicinity, you¿ll have a fantastic panorama over the River Thames and iconic Tower Bridge as your backdrop. Home to some of the finest restaurants near Tower Bridge, The Tower Hotel is the perfect dining destination for any occasion. With the Tower of London UNESCO World Heritage Site on your doorstep, exploring the city starts the moment you set foot outside.",
+        "lat": "51.506595",
+        "long": "-0.073604",
+        "SupplierNo": "008596",
+        "address": "St Katharines Way, London E1W 1LD, UK",
+        "CityName": "London",
+        "countryCode": "GB"
+      }
+    ],
+   "supplierData": [
+      {
+        "Hotel": "DoubleTree by Hilton London - Ealing",
+        "desc": "Ideally located in the heart of West London, the stylish DoubleTree by Hilton Hotel London ¿ Ealing is within minutes of Ealing Common and 14 minutes from Paddington station by train. This hotel is outside London¿s Congestion Charge Zone close to Westfield Shopping Centre, Wembley Stadium, Wembley London Design Outlet, Park Royal and Chiswick Business Park. Take advantage of ample on-site parking. Make yourself at home in one of our air-conditioned guest rooms or suites. Contemporary rooms are equipped with all the amenities for business and leisure travel, and include WiFi, Bluetooth enabled alarm clock, 40-inch TVs, Nespresso machines, laptop safes and mini-refrigerators.Enjoy dishes from the sizzling grill menu featuring locally sourced produce at W5 Grill & Bar. Dine al fresco, enjoy a cocktail on the outdoor terrace, or relax with afternoon tea served with a twist. This Ealing hotel provides an extensive breakfast buffet and 24-hour room service.",
+        "lat": "51.511557",
+        "long": "-0.290707",
+        "SupplierNo": "278540",
+        "address": "2-8 Hanger Lane, Ealing,, London,, W5 3HN",
+        "CityName": "London",
+        "countryCode": "GB"
+      },
+      {
+        "Hotel": "Thistle Piccadilly London",
+        "desc": "Our authentic Victorian exterior sits among some of the most vibrant and culturally-rich buildings the Capital has to offer, from Fortnum and Mason to the Royal Academy; and with Piccadilly Circus, Leicester Square and Soho on our doorstep, you¿ll be spoilt for choice of where to head to first.Whatever brings you to the iconic sights of London, we¿ll guarantee you a comfy room that provides the perfect place to relax and unwind. We have a range of room options, from Standard to Junior Suites. All include air-conditioning, fast & free unlimited Wi-Fi, complimentary toiletries, and a 40¿ Smart TV. Browse below and find your perfect home away from home.Our contemporary restaurant and bar has everything that you could need during your stay. With a menu full of British and European classics to choose from there is truly something for everyone. If you've been out exploring all day, come relax in a comfortable setting and refuel with some delicious food.",
+        "lat": "51.51023",
+        "long": "-0.131574",
+        "SupplierNo": "008115",
+        "address": "Coventry Street, W1D 6BZ  London, United Kingdom",
+        "CityName": "London",
+        "countryCode": "GB"
+      }
+    ]
+
+ }

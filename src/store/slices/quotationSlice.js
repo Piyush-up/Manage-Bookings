@@ -1,42 +1,21 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-/* ------------------ Async Thunk ------------------ */
-export const fetchCities = createAsyncThunk(
-  "quotation/fetchCities",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetch(
-        "http://localhost:9090/KT_Quotation/QSJavaServletDemo?Action=10"
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch cities");
-      }
-
-      return await response.json();
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-/* ------------------ Initial State ------------------ */
 const initialState = {
   selectedDate: null,
   searchCity: "",
   nights: 1,
   pax: 0,
   tourName: "",
-  cities: [],
-  loading: false,
-  error: null,
+  selectedCities: [], // list of cities added
+  isModalOpen: false, // modal state
+  mapProps: { type: "", data: null }, // data for map modal
 };
 
-/* ------------------ Slice ------------------ */
 const quotationSlice = createSlice({
   name: "quotation",
   initialState,
   reducers: {
+    // Form fields
     setSelectedDate: (state, action) => {
       state.selectedDate = action.payload;
     },
@@ -52,31 +31,46 @@ const quotationSlice = createSlice({
     setTourName: (state, action) => {
       state.tourName = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchCities.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchCities.fulfilled, (state, action) => {
-        state.loading = false;
-        state.cities = action.payload;
-      })
-      .addCase(fetchCities.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+
+    // Selected cities
+    addSelectedCity: (state, action) => {
+      const exists = state.selectedCities.find(
+        (c) => c.cityCode === action.payload.cityCode
+      );
+      if (!exists) state.selectedCities.push(action.payload);
+    },
+    removeSelectedCity: (state, action) => {
+      state.selectedCities = state.selectedCities.filter(
+        (c) => c.cityCode !== action.payload
+      );
+    },
+    clearSelectedCities: (state) => {
+      state.selectedCities = [];
+    },
+
+    openMap: (state, action) => {
+      state.mapProps = action.payload;
+      state.isModalOpen = true;
+      state.mapProps.data = action.payload.data || [];
+    },
+    closeMap: (state) => {
+      state.mapProps = { type: "", data: null };
+      state.isModalOpen = false;
+    },
   },
 });
 
-/* ------------------ Exports ------------------ */
 export const {
   setSelectedDate,
   setSearchCity,
   setNights,
   setPax,
   setTourName,
+  addSelectedCity,
+  removeSelectedCity,
+  clearSelectedCities,
+  openMap,
+  closeMap,
 } = quotationSlice.actions;
 
 export default quotationSlice.reducer;

@@ -1,8 +1,8 @@
 
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import store from "./store/store";
-import QuotationUI from "./components/QuotationUI/QuotationUI";
+import QuotationUI from "./features/quotation/QuotationUI.jsx";
+import { store } from "./store/store";
 
 
 function App() {
@@ -10,9 +10,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-        
           <Route path="/" element={<QuotationUI />} />
-
         </Routes>
       </BrowserRouter>
     </Provider>

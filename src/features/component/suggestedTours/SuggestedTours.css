@@ -86,3 +86,32 @@
 .items-list-container::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.content-container {
+  margin-top: 12px;
+  height: 280px;
+  overflow-y: auto;
+  border-radius: 4px;
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.col-checkbox {
+  width: 40px;
+  text-align: center;
+}
+
+.col-type,
+.col-city,
+.col-supplier {
+  flex: 1;
+}
+
+.col-supplier {
+  text-align: right;
+}
+

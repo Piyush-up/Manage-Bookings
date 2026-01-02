@@ -4,9 +4,9 @@ import QuotationUI from "../components/QuotationUI/QuotationUI";
 
 function QuotationPage() {
   return (
-    <div>
+    <>
      <QuotationUI />
-    </div>
+    </>
   );
 }
 
