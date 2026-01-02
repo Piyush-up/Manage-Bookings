@@ -29,7 +29,9 @@
 }
 
 
-
+.quotation-footer{
+      padding: 0px 0px 0px 10px;
+}
 .quotation-header {
   background-color: #1b176e;
   display: flex;

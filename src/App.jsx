@@ -1,7 +1,7 @@
 
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import QuotationUI from "./components/QuotationUI/QuotationUI";
+import QuotationUI from "./features/quotation/QuotationUI.jsx";
 import { store } from "./store/store";
 
 

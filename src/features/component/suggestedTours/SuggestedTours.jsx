@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { Card, Typography, Collapse, Checkbox, Spin } from "antd";
-import { TabContainer } from "../../hooks/useTabState.jsx";
-import suggestedToursConfig from "../../data/suggestedToursConfig.json";
-import { useLazyFetchDaysDataQuery } from "../../api/quotationApi.js";
+import { TabContainer } from "../../../hooks/useTabState.jsx";
+import suggestedToursConfig from "../../../data/suggestedToursConfig.json";
+import { useLazyFetchDaysDataQuery } from "../../../api/quotationApi.js";
 import "./SuggestedTours.css";
 
 const { Text } = Typography;
@@ -17,7 +17,7 @@ const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
   const [triggerFetchDays, { data: daysApiData = [], isFetching }] =
     useLazyFetchDaysDataQuery();
 
-  /* ---------------- SIMPLE LIST ---------------- */
+  
   const renderSimpleList = useCallback((items, mode) => {
     if (!items?.length) return <Text>No data available</Text>;
 
@@ -39,7 +39,6 @@ const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
     );
   }, []);
 
-  /* ---------------- DAY CHANGE HANDLER ---------------- */
   const handleDayChange = useCallback(
     (key) => {
       const dayIndex = Number(key);
@@ -54,7 +53,6 @@ const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
     [days, triggerFetchDays]
   );
 
-  /* ---------------- DAYS VIEW ---------------- */
   const renderDaysView = useCallback(() => {
     if (!days?.length) return <Text>No days available</Text>;
 
@@ -116,7 +114,6 @@ const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
     );
   }, [days, selectedDayIndex, daysApiData, isFetching, handleDayChange]);
 
-  /* ---------------- MODE RENDER MAP ---------------- */
   const renderByMode = useMemo(
     () => ({
       tour: () => renderSimpleList(tours, "tour"),
@@ -126,7 +123,6 @@ const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
     [renderSimpleList, renderDaysView, tours, suppliers]
   );
 
-  /* ---------------- RENDER ---------------- */
   return (
     <Card size="small" style={{ padding: 12 }}>
       <TabContainer
