@@ -119,66 +119,71 @@
       }
     ],
     "days": [
-      {
-        "id": 0,
-        "duration": 3,
-        "price": 2200,
-        "currency": "EUR"
-      },
-      {
-        "id": 1,
-        "duration": 4,
-        "price": 2300,
-        "currency": "EUR"
-      },
-      {
-        "id": 2,
-        "duration": 5,
-        "price": 2400,
-        "currency": "EUR"
-      },
-      {
-        "id": 3,
-        "duration": 6,
-        "price": 2500,
-        "currency": "EUR"
-      },
-      {
-        "id": 4,
-        "duration": 7,
-        "price": 2600,
-        "currency": "EUR"
-      },
-      {
-        "id": 5,
-        "duration": 8,
-        "price": 2700,
-        "currency": "EUR"
-      },
-      {
-        "id": 6,
-        "duration": 9,
-        "price": 2800,
-        "currency": "EUR"
-      },
-      {
-        "id": 7,
-        "duration": 10,
-        "price": 2900,
-        "currency": "EUR"
-      },
-      {
-        "id": 8,
-        "duration": 11,
-        "price": 3000,
-        "currency": "EUR"
-      },
-      {
-        "id": 9,
-        "duration": 12,
-        "price": 3100,
-        "currency": "EUR"
-      }
-    ]
-  }
+    {
+        "cityName": "London",
+        "subitems": [
+            {
+                "checkBoxSelected": true,
+                "cityCode": "LON",
+                "cityName": "London",
+                "title": "Day Trip to York by Rail (13 Hours)",
+                "departurePlace": "King's Cross Station \r<br>ticket office",
+                "description": "Arrive at Kings Cross station at 7:30am for your 8:00am departure,",
+                "importantNote": "Please be a the meeting point 30 minutes prior to departure time."
+            },
+            {
+                "checkBoxSelected": true,
+                "cityCode": "LON",
+                "cityName": "London",
+                "title": "Jack The Riper Walking Tour (1,5 Hour)",
+                "departurePlace": "3:30pm tour: Golden Tours Tourist Bus Stop 8 (Hop-On Hop-Off Bus Tour). ",
+                "description": "The History\r<br>Travel back in time to Victorian ",
+                "importantNote": "Please be at the meeting point 15 minutes prior to departure time. "
+            },
+            {
+                "checkBoxSelected": true,
+                "cityCode": "LON",
+                "cityName": "London",
+                "title": "Shakespeare's Stratford and the Cotwolds (10 Hours)",
+                "departurePlace": "Bus Stop 1, Bulleid Way, Victoria, London, SW1W 9SH",
+                "description": "Shakespeare's Birthplace at Stratford-Upon-Avon\r<br>\r<br>A market town with a ",
+                "importantNote": "Please be at the meeting point at least 30 minutes prior to departure time for "
+            }
+           
+        ]
+    },
+    {
+        "cityName": "Paris",
+        "subitems": [
+            {
+                "checkBoxSelected": true,
+                "cityCode": "PAR",
+                "cityName": "Paris",
+                "title": "Dinner And Show At Lido (4,5 Hours)",
+                "departurePlace": "2 rue des Pyramides 75001 Paris\r<br>",
+                "description": "Dinner at the Lido de Paris\r<br>\r<br>Located on the world famous Champs-Elysees, the Lido and its revue have contributed to the notoriety of the City of Lights since 1946. Have a musical dinner with the Lido Orchestra.\r<br>\r<br>Lido show\r<br>\r<br>At 9:00 PM you will delight to the new revue : 70 artists including the beautiful Doriss Girls, dreamy costumes, breathtaking scenery, and a flurry of feathers!\r<br>\r<br>You will be able to dance before the show.\r<br>\r<br>Tour ends in the vicinity of your hotel if located within Paris.\r<br>The tour ends at about 11.15 PM.\r<br>\r<br>Please note, formal dress required. Gentlemen are recommended to wear tie and jacket.\r<br>The cloakroom compulsory at Lido is not included.",
+                "importantNote": "Please be at the meeting point 30 minutes prior to departure to check in. Boarding closes 10 minutes prior to departure. \r<br>\r<br>Price includes: \r<br>- transportation by air-conditioned coach\r<br>- dinner at the Lido with 1/2 bottle of wine included\r<br>- Lido show\r<br>- multilingual hostess\r<br>\r<br>The tour ends in the vicinity of hotels inside Paris.\r<br>\r<br>Please note, that the access of children under 4 years old is forbidden. \r<br>\r<br>Please also note, that there is no guide and commentary on this tour. \r<br>\r<br>Casual elegant dress code required.\r<br>\r<br>The company reserves the right to change routing, pricing and departure of excursion during the season.\r<br>\r<br>Tour is not operating on: Sat, Jul 14, 2018[7.00 PM], Sun, Jul 29, 2018[7.00 PM]"
+            },
+            {
+                "checkBoxSelected": true,
+                "cityCode": "PAR",
+                "cityName": "Paris",
+                "title": "Giverny Tour (5 Hours)",
+                "departurePlace": "2 rue des Pyramides 75001 Paris",
+                "description": "Half-day excursion from Paris to visit the house and magnificent Claude Monet garden of the best-known Impressionist painter, accompanied by an official guide. Immerse yourself in the world of this supremely talented painter, famous for his landscape canvases and numerous views of his garden, such as the \"Water Lilies,\" the \"Japanese Bridge\" and \"The Irises.\" Your visit will also include the beautiful water lily pond, with its play of colors and Monet's legendary Japanese-inspired bridge. Learn about the artist's daily life by visiting his home and his studio.\r<br>\r<br>Set off from Central Paris for a unique excursion in the footsteps of the Impressionist painter Claude Monet. Admire the lush green landscapes of the French countryside as you travel by luxury air-conditioned coach to the small Normandy village of Giverny. The trip will take approximately one and a half hours. The painter and gardener Claude Monet lived there for 43 years, with his family of eight children, from 1883 until his death in 1926.\r<br>\r<br>Passionate about gardening and color variations, he designed his flower garden, fruit tree orchard and water garden as if they were works of art. As you visit the gardens at Giverny, you will see the central pathway leading up to the house, bordered by different varieties of nasturtiums and roses, as well as the multicolored flower beds full of tulips, narcissi, daffodils, irises and peonies. Stroll through the Clos Normand Flower Garden, which is home to many plants of Eastern origins, until you reach the lavish water garden, so famous for its water lilies, weeping willows and green-painted Japanese Bridge (bridges like this are traditionally red in Japan). Be captivated by Giverny's unique atmosphere, its light and the reflection of clouds on the water.\r<br>\r<br>Take advantage of the opportunity to explore Monet's pink-plastered house, where he lived and worked for many years (guided tours are not permitted due to the lack of space). Discover the blue reading room, which leads into the larder and Claude Monet's studio, where the doyen of the French impressionists worked until 1889. These rooms, as well as those of his private apartments, have been reconstructed with the original furniture that was already in the house in Monet's day. Visit the sunny yellow dining room, which has been reconstructed down to the very last detail. It was very modern for its time, with earthenware dishes and a kitchen tiled with local blue and white Rouen tiles. In the Dining Room, admire one of the most important collections of Japanese prints in the world.\r<br>\r<br>At the end of your visit, take advantage of the village and the pretty gift and book shop; it is housed in what was once the studio where Monet painted the huge Water Lilies canvases. It stretches for more than 3,200 square feet! The shop offers a wide range of products linked to the Impressionist's work: postcards, posters, teas, books, official Claude Monet tableware, flower seeds and plants.",
+                "importantNote": "Please be at the meeting point 10 minutes prior to departure time.\r<br>\r<br>Price includes:\r<br>- Transportation by air-conditioned\r<br>- Guide\r<br>- Entrance tickets\r<br>\r<br>The company reserves the rights to change prices and departures during the season.\r<br>"
+            },
+            {
+                "checkBoxSelected": true,
+                "cityCode": "PAR",
+                "cityName": "Paris",
+                "title": "Historic Paris and Notre Dame ( 3,45 Hours)",
+                "departurePlace": "2 rue des Pyramides 75001 Paris ",
+                "description": "Drive to the oldest part of the Capital  : First admire the Vendome Square and the Old Opera house - Le Louvre - Hôtel de Ville de Paris (City Hall) - Bastille Square - Rue Saint-Antoine - Marais District - Latin Quarter - Sorbonne - Collège de France - Panthéon - Luxemburg Gardens (Senate) - Saint-Germain des Prés. \r<br>During the city tour, the guide will give you a commentary about Paris monuments.\r<br>\r<br>Visit Notre Dame Cathedral\r<br>\r<br>Take advantage of this specific Notre Dame de Paris tour to learn about all the History, Architecture and art works of the Cathedral, thanks to an experimented guide. Short transfer on the Seine River to reach the Cité Island and for the return to the bus (except when the river is too high). The guided visit will give you the opportunity to learn about the importance of the Cathedral in Parisians' life.",
+                "importantNote": "Please be at the meeting point 30 minutes prior to departure time to check-in. Boarding closes 10 minutes prior to departure. \r<br>\r<br>Price includes:\r<br> - Transportation by air-conditioned coaches\r<br>- Guide\r<br>\r<br>The company reserves the right to change routing, pricing and departures during the season.\r<br>\r<br>Tour is not operating on:\r<br>Sat, Jul 14, 2018[9.15 AM]"
+            }
+        ]
+    }
+]
+}
 }

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { useState, Suspense, lazy, useMemo, useCallback } from "react";
 import {
   Layout,
   Input,
@@ -10,17 +10,21 @@ import {
   Space,
   Card,
   Spin,
+  Select,
 } from "antd";
-import {FooterDangerButton} from "../../common/FooterButton.jsx";
+import { FooterDangerButton } from "../../common/FooterButton.jsx";
 import FooterButtonGroup from "../../common/FooterButtonGroup";
 import { useTabState, TabContainer } from "../../hooks/useTabState.jsx";
 import tableColumns from "../../data/tableColumns.json";
 import tableData from "../../data/tableData.json";
 import uiData from "../../data/uiData.json";
 import "./QuotationUI.css";
-import { useDispatch } from "react-redux";
-import { fetchCities } from "../../store/slices/quotationSlice.js";
-
+import {
+  useFetchCitiesQuery,
+  useLazyFetchSuppliersByCityQuery,
+  useLazyFetchSuggestedOptionalTourResultQuery,
+  useLazyFetchTourPackagesQuery,
+} from "../../api/quotationApi.js";
 
 const RequestedITI = lazy(() => import("./RequestedITI"));
 const EditService = lazy(() => import("./EditService"));
@@ -39,33 +43,100 @@ const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
 const QuotationUI = () => {
-  const dispatch = useDispatch();
   const { activeTab: activeMainTab, setActiveTab: setActiveMainTab } =
     useTabState("Suggested Trip");
   const { activeTab: rightTab, setActiveTab: setRightTab } =
     useTabState("RequestedITI");
 
-  const columns = tableColumns.quotationColumns;
-  const dataSource = tableData.quotationData;
-  const requestItems = uiData.requestItems;
+  const columns = useMemo(() => tableColumns.quotationColumns, []);
+  const dataSource = useMemo(() => tableData.quotationData, []);
+  const requestItems = useMemo(() => uiData.requestItems, []);
+  const [city, setCity] = useState("");
+  const [nights, setNights] = useState(1);
+  const [selectedCities, setSelectedCities] = useState([]);
+  const { data: cities = [] } = useFetchCitiesQuery();
 
+  const [triggerFetchTourPackages, { data: tourPackages = [] }] =
+    useLazyFetchTourPackagesQuery();
+  const [triggerFetchSuppliersByCity, { data: suppliers = [] }] =
+    useLazyFetchSuppliersByCityQuery();
+  const [
+    triggerFetchSuggestedOptionalTourResult,
+    { data: suggestedOptionalTourResult = [] },
+  ] = useLazyFetchSuggestedOptionalTourResultQuery();
 
-  useEffect(() => {
-dispatch(fetchCities()); 
-  }, [dispatch]);
+  const handleGo = async () => {
+    if (!selectedCities.length) return;
+
+    const cityCodes = Array.from(
+      new Set(selectedCities.map((c) => c.cityCode))
+    );
+    try {
+      await Promise.all([
+        triggerFetchTourPackages().unwrap(),
+        triggerFetchSuppliersByCity(cityCodes).unwrap(),
+        triggerFetchSuggestedOptionalTourResult(cityCodes).unwrap(),
+      ]);
+    } catch (err) {
+      console.error("Go action failed", err);
+    }
+  };
+
+  const handleSelectCities = useCallback(() => {
+    if (!city) return;
+
+    setSelectedCities((prev) => [
+      ...prev,
+      { cityCode: city, nights: Number(nights) },
+    ]);
+
+    setCity("");
+    setNights(1);
+  }, [city, nights]);
+
+  const renderMainTab = () => {
+    switch (activeMainTab) {
+      case "My Trip":
+        return <MyTrip />;
+      case "Suggested Trip":
+        return (
+          <Card>
+            <Table
+              size="small"
+              columns={columns}
+              dataSource={dataSource}
+              pagination={false}
+              scroll={{ x: 800 }}
+            />
+          </Card>
+        );
+      case "Quote Sheet":
+        return <QuoteSheet />;
+      case "Offer Sheet":
+        return <OfferSheet />;
+      case "Conditions":
+        return <Conditions />;
+      case "Revenue Sheet":
+        return <RevenueSheet />;
+      case "Sales Sheet":
+        return <SalesSheet />;
+      case "ITL Sheet":
+        return <ITLSheet />;
+      case "Optional Tour":
+        return <OptionalTour />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <Layout >
-      <Header
-        style={{
-          background:
-            "#1b176e",
-          display: "flex",
-          alignItems: "center",
-          paddingInline: 24,
-        }}
-      >
-        <Title level={4} style={{ color: "#fff", margin: 0 }}>
+    <Layout>
+      <Header className="quotation-header">
+        <Title
+          level={4}
+          className="quotation-header-title"
+          style={{ color: "white" }}
+        >
           TUMLARE DESTINATION MANAGEMENT
         </Title>
       </Header>
@@ -95,9 +166,19 @@ dispatch(fetchCities());
                     </div>
 
                     <div style={{ flex: 1, minWidth: 200 }}>
-                      <Input
+                      <Select
                         placeholder="Search cities"
-                        style={{ height: 32 }}
+                        style={{ width: "100%", height: 32 }}
+                        options={cities.map((city) => ({
+                          value: city.code,
+                          label: city.name,
+                        }))}
+                        onChange={(value) => {
+                          setCity(value);
+                          console.log(value);
+                        }}
+                        value={city}
+                        allowClear
                       />
                     </div>
 
@@ -105,12 +186,20 @@ dispatch(fetchCities());
                       <Input
                         placeholder="Nights"
                         style={{ height: 32, textAlign: "center" }}
+                        value={nights}
+                        onChange={(e) => setNights(e.target.value)}
                       />
                     </div>
-                    <FooterDangerButton >+</FooterDangerButton>
-                    <FooterDangerButton>Go</FooterDangerButton>
+                    <FooterDangerButton onClick={handleSelectCities}>
+                      +
+                    </FooterDangerButton>
+                    <FooterDangerButton onClick={handleGo}>
+                      Go
+                    </FooterDangerButton>
                     {["HTLS Map", "Supp Map", "CityRoute"].map((btn) => (
-                      <FooterDangerButton key={btn} className="btn-map" >{btn}</FooterDangerButton>
+                      <FooterDangerButton key={btn} className="btn-map">
+                        {btn}
+                      </FooterDangerButton>
                     ))}
                   </div>
                 </div>
@@ -118,7 +207,30 @@ dispatch(fetchCities());
                 <div style={{ height: 10 }} />
 
                 <Row gutter={[6, 6]}>
-                  <Col md={6}></Col>
+                  <Col md={6}>
+                    <div className="selected-cities">
+                      {selectedCities.length > 0 ? (
+                        selectedCities.map((item, index) => {
+                          const cityObj = cities.find(
+                            (c) => c.code === item.cityCode
+                          );
+
+                          return (
+                            <div key={index} className="selected-city">
+                              <strong>{cityObj?.name}</strong>
+                              <span style={{ marginLeft: 8 }}>
+                                ({item.nights} nights)
+                              </span>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="no-selected-cities">
+                          No cities selected
+                        </div>
+                      )}
+                    </div>
+                  </Col>
                   <Col md={18}>
                     <Row style={{ border: "1px solid #e9e9e9" }}>
                       {[
@@ -207,28 +319,8 @@ dispatch(fetchCities());
               </Card>
 
               <Row gutter={16}>
-                <Col xs={24} lg={16}>
-                  <Suspense fallback={<Spin />}>
-                    {activeMainTab === "My Trip" && <MyTrip />}
-                    {activeMainTab === "Suggested Trip" && (
-                      <Card>
-                        <Table
-                          size="small"
-                          columns={columns}
-                          dataSource={dataSource}
-                          pagination={false}
-                          scroll={{ x: 800 }}
-                        />
-                      </Card>
-                    )}
-                    {activeMainTab === "Quote Sheet" && <QuoteSheet />}
-                    {activeMainTab === "Offer Sheet" && <OfferSheet />}
-                    {activeMainTab === "Conditions" && <Conditions />}
-                    {activeMainTab === "Revenue Sheet" && <RevenueSheet />}
-                    {activeMainTab === "Sales Sheet" && <SalesSheet />}
-                    {activeMainTab === "ITL Sheet" && <ITLSheet />}
-                    {activeMainTab === "Optional Tour" && <OptionalTour />}
-                  </Suspense>
+                <Col xs={24} lg={16} style={{ backgroundColor: "white" }}>
+                  <Suspense fallback={<Spin />}>{renderMainTab()}</Suspense>
                 </Col>
 
                 <Col xs={24} lg={8}>
@@ -238,7 +330,11 @@ dispatch(fetchCities());
                       size="middle"
                       style={{ width: "100%" }}
                     >
-                      <SuggestedTours />
+                      <SuggestedTours
+                        tours={tourPackages}
+                        suppliers={suppliers}
+                        days={suggestedOptionalTourResult}
+                      />
                       <TourCostTable />
                     </Space>
                   </Suspense>

@@ -1,77 +1,141 @@
-import React, { useState } from "react";
-import { Card, Typography, Button } from "antd";
-
-import suggestedToursConfig from "../../data/suggestedToursConfig.json";
+import React, { useState, useCallback, useMemo } from "react";
+import { Card, Typography, Collapse, Checkbox, Spin } from "antd";
 import { TabContainer } from "../../hooks/useTabState.jsx";
+import suggestedToursConfig from "../../data/suggestedToursConfig.json";
+import { useLazyFetchDaysDataQuery } from "../../api/quotationApi.js";
 import "./SuggestedTours.css";
 
 const { Text } = Typography;
+const { Panel } = Collapse;
 
-const SuggestedTours = () => {
+const SuggestedTours = ({ tours = [], suppliers = [], days = [] }) => {
   const [selectedMode, setSelectedMode] = useState("tour");
-  const { modeButtons, suggestedToursData } = suggestedToursConfig;
-  const { tours, suppliers, days } = suggestedToursData;
+  const [selectedDayIndex, setSelectedDayIndex] = useState(null);
 
-  const renderItemList = (items, mode) => {
-    let displayItems = [];
+  const { modeButtons } = suggestedToursConfig;
 
-    if (mode === "tour") {
-      displayItems = items.map((item) => ({
-        key: item.id,
-        label: `${item.name} – ${item.description}`,
-      }));
-    } else if (mode === "supplier") {
-      displayItems = items.map((item) => ({
-        key: item.id,
-        label: `${item.name} – ${item.status}`,
-      }));
-    } else if (mode === "days") {
-      displayItems = items.map((item) => ({
-        key: item.id,
-        label: `${item.duration} Days – ${item.price} ${item.currency} per person`,
-      }));
-    }
+  const [triggerFetchDays, { data: daysApiData = [], isFetching }] =
+    useLazyFetchDaysDataQuery();
+
+  /* ---------------- SIMPLE LIST ---------------- */
+  const renderSimpleList = useCallback((items, mode) => {
+    if (!items?.length) return <Text>No data available</Text>;
 
     return (
       <div className="items-list-container">
-        {displayItems.map((item, idx) => (
+        {items.map((item, idx) => (
           <div
-            key={item.key}
+            key={idx}
             className={`item-row ${idx % 2 === 0 ? "alternate-bg" : ""}`}
           >
-            <Text>{item.label}</Text>
-            {/* <Button type="text" size="small" className="item-select-btn">
-              Select
-            </Button> */}
+            <Text>
+              {mode === "supplier"
+                ? `${item.cityCode} – ${item.suppType} – ${item.suppShortName}`
+                : `${item.tourRequestNo} – ${item.tourName}`}
+            </Text>
           </div>
         ))}
       </div>
     );
-  };
+  }, []);
 
-  const getItemsForMode = () => {
-    switch (selectedMode) {
-      case "supplier":
-        return suppliers;
-      case "days":
-        return days;
-      default:
-        return tours;
-    }
-  };
+  /* ---------------- DAY CHANGE HANDLER ---------------- */
+  const handleDayChange = useCallback(
+    (key) => {
+      const dayIndex = Number(key);
+      const cityCode = days?.[dayIndex]?.subitems?.[0]?.cityCode;
 
-  return (
-    <Card styles={{ body: { padding: 12, paddingBottom: 0 } }} size="small">
-      <div style={{ marginBottom: 12 }}>
-      
+      setSelectedDayIndex(dayIndex);
+
+      if (cityCode) {
+        triggerFetchDays({ cityCode, day: dayIndex + 1 });
+      }
+    },
+    [days, triggerFetchDays]
+  );
+
+  /* ---------------- DAYS VIEW ---------------- */
+  const renderDaysView = useCallback(() => {
+    if (!days?.length) return <Text>No days available</Text>;
+
+    return (
+      <>
         <TabContainer
-          tabs={modeButtons.map((btn) => ({ key: btn.key, label: btn.label }))}
-          activeTab={selectedMode}
-          onTabChange={setSelectedMode}
-          containerStyle={{ marginBottom: 0 }}
+          variant="secondary"
+          tabs={days.map((_, idx) => ({
+            key: idx,
+            label: `Day-${idx + 1}`,
+          }))}
+          activeTab={selectedDayIndex}
+          onTabChange={handleDayChange}
+          containerStyle={{ marginBottom: 12 }}
         />
-      </div>
-      <div>{renderItemList(getItemsForMode(), selectedMode)}</div>
+
+        {!selectedDayIndex && selectedDayIndex !== 0 ? (
+          <Text type="secondary">Please select a day</Text>
+        ) : isFetching ? (
+          <Spin />
+        ) : daysApiData?.length ? (
+          <Collapse accordion>
+            {daysApiData.map((optionItem, optionIdx) => (
+              <Panel
+                key={optionIdx}
+                header={`${optionItem.option} (Day ${optionItem.day})`}
+              >
+                {optionItem.subitems?.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`item-row ${
+                      idx % 2 === 0 ? "alternate-bg" : ""
+                    } day-row`}
+                  >
+                    <div className="col-checkbox">
+                      <Checkbox checked={item.checkBoxSelected} />
+                    </div>
+
+                    <div className="col-type">
+                      <Text>{item.suppType}</Text>
+                    </div>
+
+                    <div className="col-city">
+                      <Text>{item.cityName}</Text>
+                    </div>
+
+                    <div className="col-supplier">
+                      <Text>{item.suppShortName}</Text>
+                    </div>
+                  </div>
+                ))}
+              </Panel>
+            ))}
+          </Collapse>
+        ) : (
+          <Text>No services available</Text>
+        )}
+      </>
+    );
+  }, [days, selectedDayIndex, daysApiData, isFetching, handleDayChange]);
+
+  /* ---------------- MODE RENDER MAP ---------------- */
+  const renderByMode = useMemo(
+    () => ({
+      tour: () => renderSimpleList(tours, "tour"),
+      supplier: () => renderSimpleList(suppliers, "supplier"),
+      days: renderDaysView,
+    }),
+    [renderSimpleList, renderDaysView, tours, suppliers]
+  );
+
+  /* ---------------- RENDER ---------------- */
+  return (
+    <Card size="small" style={{ padding: 12 }}>
+      <TabContainer
+        tabs={modeButtons}
+        activeTab={selectedMode}
+        onTabChange={setSelectedMode}
+      />
+
+      <div className="content-container">{renderByMode[selectedMode]?.()}</div>
     </Card>
   );
 };

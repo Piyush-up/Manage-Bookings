@@ -27,3 +27,22 @@
   border-radius: 4px;
   padding: 6px 8px;
 }
+
+
+
+.quotation-header {
+  background-color: #1b176e;
+  display: flex;
+  align-items: center;
+  padding-inline: 24px;
+}
+
+.quotation-header-title {
+  color: #fff;
+  margin: 0;
+  
+}
+
+
+
+
