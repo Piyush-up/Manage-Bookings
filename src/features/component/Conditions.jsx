@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Typography } from "antd";
-
 const { Title, Text } = Typography;
 
 const Conditions = () => {
