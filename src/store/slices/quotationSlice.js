@@ -31,14 +31,13 @@ const quotationSlice = createSlice({
     setTourName: (state, action) => {
       state.tourName = action.payload;
     },
-
-    // Selected cities
     addSelectedCity: (state, action) => {
       const exists = state.selectedCities.find(
         (c) => c.cityCode === action.payload.cityCode
       );
       if (!exists) state.selectedCities.push(action.payload);
     },
+
     removeSelectedCity: (state, action) => {
       state.selectedCities = state.selectedCities.filter(
         (c) => c.cityCode !== action.payload
@@ -52,6 +51,7 @@ const quotationSlice = createSlice({
       state.mapProps = action.payload;
       state.isModalOpen = true;
       state.mapProps.data = action.payload.data || [];
+      state.mapProps.type = action.payload.type || "";
     },
     closeMap: (state) => {
       state.mapProps = { type: "", data: null };

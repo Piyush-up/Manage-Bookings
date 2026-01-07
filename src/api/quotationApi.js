@@ -56,7 +56,32 @@ export const quotationApi = baseApi.injectEndpoints({
       transformResponse: (response) => response?.data ?? [],
     }),
 
-    
+    fetchGeoLocations: builder.query({
+      query: (cityNames) => ({
+        url: "/location/geo",
+        params: { names: cityNames },
+      }),
+      transformResponse: (response) => {
+        return response?.data ?? response?.data ?? [];
+      },
+    }),
+
+    fetchSuppliersByGeo: builder.query({
+      query: (cityName) => {
+        if (!cityName) {
+          throw new Error("cityName is required");
+        }
+
+        return {
+          url: `/suppliers/by-city/${cityName}`, // directly use string
+        };
+      },
+      transformResponse: (response) => {
+        return response?.data ?? [];
+      },
+      providesTags: ["SupplierGeo"],
+      keepUnusedDataFor: 300,
+    }),
   }),
 });
 
@@ -70,4 +95,8 @@ export const {
   useFetchSuggestedOptionalTourResultQuery,
   useFetchDaysDataQuery,
   useLazyFetchDaysDataQuery,
+  useFetchGeoLocationsQuery,
+  useLazyFetchGeoLocationsQuery,
+  useFetchSuppliersByGeoQuery,
+  useLazyFetchSuppliersByGeoQuery,
 } = quotationApi;

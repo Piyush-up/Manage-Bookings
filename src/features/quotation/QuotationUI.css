@@ -46,5 +46,29 @@
 }
 
 
+.filters-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+}
+
+.delete-icon {
+  margin-left: 8px;
+  cursor: pointer;
+  color: red;
+}
+
+.field-input {
+  width: 100%;
+  height: 32px;
+}
+
+
+.filters-left{
+    display: flex;
+    gap: 24px;
+}
+
+
 
 

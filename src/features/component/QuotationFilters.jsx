@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Row,
   Col,
@@ -6,19 +6,20 @@ import {
   Select,
   Input,
   InputNumber,
+  Dropdown,
 } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, DownOutlined } from "@ant-design/icons";
 import { FooterDangerButton } from "../../common/FooterButton/FooterButton.jsx";
 import "../quotation/QuotationUI.css";
+
 const QuotationFilters = ({
-  cities,
+  cities = [],
   searchCity,
   nights,
-  selectedCities,
-  REQUEST_FIELDS,
-  EXTRA_FIELDS,
-  MAP_BUTTONS,
-
+  selectedCities = [],
+  REQUEST_FIELDS = [],
+  EXTRA_FIELDS = [],
+  MAP_BUTTONS = [],
   onSearchCityChange,
   onNightsChange,
   onAddCity,
@@ -26,90 +27,143 @@ const QuotationFilters = ({
   onMapClick,
   onRemoveCity,
 }) => {
+  /* ----------------------------- Derived Data ----------------------------- */
+
+  const hotelMapMenuItems = useMemo(() => {
+    return cities
+      .filter((city) =>
+        selectedCities.some((selected) => selected.cityCode === city.code)
+      )
+      .map((city, index) => ({
+        key: city.name,
+        label: city.name,
+      }));
+  }, [cities, selectedCities]);
+
+  const citySelectOptions = useMemo(() => {
+    return cities.map((city) => ({
+      value: city.code,
+      label: city.name,
+    }));
+  }, [cities]);
+
+  const renderMapButtons = () =>
+    MAP_BUTTONS.map((mapType) => {
+      if (mapType === "HTLS Map") {
+        return (
+          <Dropdown
+            key={mapType}
+            disabled={!hotelMapMenuItems.length}
+            menu={{
+              items: hotelMapMenuItems.length
+                ? hotelMapMenuItems
+                : [
+                    {
+                      key: "no-city",
+                      label: "No cities selected",
+                      disabled: true,
+                    },
+                  ],
+              onClick: ({ key }) => onMapClick("HTLS Map", key),
+            }}
+          >
+            <FooterDangerButton className="btn-map">
+              HTLS Map <DownOutlined />
+            </FooterDangerButton>
+          </Dropdown>
+        );
+      }
+
+      if (mapType === "Supp Map") {
+        return (
+          <Dropdown
+            key={mapType}
+            menu={{
+              items: hotelMapMenuItems,
+              onClick: ({ key }) => onMapClick("Supp Map", key),
+            }}
+            disabled={!hotelMapMenuItems.length}
+          >
+            <FooterDangerButton className="btn-map">
+              Supp Map <DownOutlined />
+            </FooterDangerButton>
+          </Dropdown>
+        );
+      }
+
+      return (
+        <FooterDangerButton
+          key={mapType}
+          className="btn-map"
+          onClick={() => onMapClick(mapType, "cityroute")}
+        >
+          {mapType}
+        </FooterDangerButton>
+      );
+    });
+
+  /* ------------------------------- UI ------------------------------- */
+
   return (
     <div className="filters-wrapper">
-      {/* Top Filters */}
-      <div
-        style={{
-          display: "flex",
-          gap: 12,
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-        }}
-      >
-        <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
-          <div style={{ width: 140 }}>
-            <DatePicker style={{ width: "100%", height: 32 }} />
+      {/* ---------- Top Filter Bar ---------- */}
+      <div className="filters-top">
+        <div className="filters-left">
+          <DatePicker className="w-140" />
+
+          <Select
+            placeholder="Search cities"
+            showSearch
+            allowClear
+            options={citySelectOptions}
+            value={searchCity}
+            onChange={onSearchCityChange}
+            filterOption={(input, option) =>
+              option?.label?.toLowerCase().includes(input.toLowerCase())
+            }
+            style={{ width: "200px" }}
+            className="w-90"
+          />
+
+          <InputNumber
+            placeholder="Nights"
+            min={1}
+            value={nights}
+            onChange={onNightsChange}
+            className="w-80"
+          />
+
+          {/* ✅ Button spacing handled here */}
+          <div className="filters-actions">
+            <FooterDangerButton onClick={onAddCity}>Add</FooterDangerButton>
+            <FooterDangerButton onClick={onGo}>Go</FooterDangerButton>
+            {renderMapButtons()}
           </div>
-
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <Select
-              placeholder="Search cities"
-              showSearch
-              filterOption={(input, option) =>
-                option?.label?.toLowerCase().includes(input.toLowerCase())
-              }
-              style={{ width: "100%", height: 32 }}
-              options={cities.map((city) => ({
-                value: city.code,
-                label: city.name,
-              }))}
-              value={searchCity}
-              onChange={onSearchCityChange}
-              allowClear
-            />
-          </div>
-
-          <div style={{ width: 80 }}>
-            <InputNumber
-              placeholder="Nights"
-              style={{ width: "100%", height: 32 }}
-              value={nights}
-              min={1}
-              onChange={onNightsChange}
-            />
-          </div>
-
-          <FooterDangerButton onClick={onAddCity}>+</FooterDangerButton>
-          <FooterDangerButton onClick={onGo}>Go</FooterDangerButton>
-
-          {MAP_BUTTONS.map((btn) => (
-            <FooterDangerButton
-              key={btn}
-              className="btn-map"
-              onClick={() => onMapClick(btn)}
-            >
-              {btn}
-            </FooterDangerButton>
-          ))}
         </div>
       </div>
 
-      {/* Selected Cities + Request Fields */}
       <div style={{ height: 10 }} />
 
       <Row gutter={[6, 6]}>
-        {/* Selected Cities */}
+        {/* ---------- Selected Cities ---------- */}
         <Col md={6}>
           <div className="selected-cities">
             {selectedCities.length ? (
-              selectedCities.map((item) => {
-                const cityObj = cities.find(
-                  (c) => c.code === item.cityCode
+              selectedCities.map((selectedCity) => {
+                const cityDetails = cities.find(
+                  (city) => city.code === selectedCity.cityCode
                 );
+
                 return (
-                  <div key={item.cityCode} className="selected-city">
-                    <strong>{cityObj?.name}</strong>
-                    <span style={{ marginLeft: 8 }}>
-                      ({item.nights} nights)
-                    </span>
+                  <div key={selectedCity.cityCode} className="selected-city">
+                    <strong>
+                      {cityDetails?.name || selectedCity.cityCode}
+                    </strong>
+                    <span> ({selectedCity.nights} nights)</span>
+
                     <DeleteOutlined
-                      style={{
-                        marginLeft: 8,
-                        cursor: "pointer",
-                        color: "red",
-                      }}
-                      onClick={() => onRemoveCity(item.cityCode)}
+                      className="delete-icon"
+                      onClick={() => onRemoveCity(selectedCity.cityCode)}
                     />
                   </div>
                 );
@@ -120,10 +174,10 @@ const QuotationFilters = ({
           </div>
         </Col>
 
-        {/* Request Fields */}
+        {/* ---------- Request Fields ---------- */}
         <Col md={18}>
-          <Row style={{ border: "1px solid #e9e9e9" }}>
-            {[...REQUEST_FIELDS, ...EXTRA_FIELDS].map((label, index) => (
+          <Row className="request-box">
+            {[...REQUEST_FIELDS, ...EXTRA_FIELDS].map((fieldLabel, index) => (
               <Col
                 key={index}
                 xs={24}
@@ -134,11 +188,12 @@ const QuotationFilters = ({
                 className="field-col"
               >
                 <div className="field-row">
-                  <div className="field-label">{label}</div>
-                  {label.includes("Date") ? (
-                    <DatePicker style={{ width: "100%", height: 32 }} />
+                  <div className="field-label">{fieldLabel}</div>
+
+                  {fieldLabel.includes("Date") ? (
+                    <DatePicker className="field-input" />
                   ) : (
-                    <Input style={{ width: "100%", height: 32 }} />
+                    <Input className="field-input" />
                   )}
                 </div>
               </Col>
@@ -150,4 +205,4 @@ const QuotationFilters = ({
   );
 };
 
-export default QuotationFilters;
+export default React.memo(QuotationFilters);
